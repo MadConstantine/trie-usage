@@ -11,7 +11,7 @@ public class IpTrie {
     private IpTrieNode root;
 
     public IpTrie() {
-        root = new IpTrieNode();
+        root = new IpTrieNode(false);
     }
 
     /**
@@ -25,11 +25,10 @@ public class IpTrie {
         for(int i=0; i<4; i++) {
             int octet = Integer.parseInt(octets[i]);
             if(!tempNode.contains(octet)) {
-                tempNode.put(octet);
+                tempNode.put(i == 3, octet);
             }
             tempNode = tempNode.get(octet);
         }
-
         tempNode.setEnd();
     }
 

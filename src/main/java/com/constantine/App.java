@@ -12,17 +12,20 @@ public class App {
         LocalTime start = LocalTime.now();
         System.out.println("Start time: " + start);
 
-        long count = 0;
+        //long count = 0;
         IpTrie trie = new IpTrie();
 
         try (BufferedReader buffer = new BufferedReader(new FileReader(args[0]))) {
-            String line;
-            while ((line = buffer.readLine()) != null) {
+            for(String line; (line = buffer.readLine()) != null; ) {
                 trie.storeAddress(line);
-                count++;
-                System.out.println("Addresses stored: " + count);
+//                count++;
+//                System.out.println("Addresses stored: " + count);
             }
         }
+
+//        try (Stream<String> stream = Files.lines(Paths.get(args[0]))) {
+//            stream.forEach(trie::storeAddress);
+//        }
 
         System.out.println("Start counting...");
         System.out.println("Number of unique addresses: " + trie.countUniqueAddresses());

@@ -2,17 +2,23 @@ package com.constantine.datastructure;
 
 public class IpTrieNode {
 
-    //private static final char digitsNumber = 256;
     private IpTrieNode[] children;
     private byte isEnd;
 
-    public IpTrieNode() {
-        //children = new IpTrieNode[digitsNumber];
-        children = new IpTrieNode[256];
+    public IpTrieNode(boolean isLeaf) {
+        if (!isLeaf) {
+            children = new IpTrieNode[256];
+        } else {
+            this.isEnd = 1;
+        }
     }
 
-    public void put(int value) {
-        children[value] = new IpTrieNode();
+    public void put(boolean isPreLeaf, int value) {
+        if (isPreLeaf) {
+            children[value] = new IpTrieNode(true);
+        } else {
+            children[value] = new IpTrieNode(false);
+        }
     }
 
     public IpTrieNode get(int value) {
