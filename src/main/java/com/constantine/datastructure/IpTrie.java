@@ -3,12 +3,12 @@ package com.constantine.datastructure;
 import java.util.LinkedList;
 
 /**
- * Data structure designed specially to store huge amounts ipv4 addresses
- * and count unique ones
+ * Data structure designed specially to store huge amounts of unique ipv4 addresses
+ * and count them
  */
 public class IpTrie {
 
-    private IpTrieNode root;
+    private final IpTrieNode root;
 
     public IpTrie() {
         root = new IpTrieNode(false);

@@ -2,12 +2,13 @@ package com.constantine.datastructure;
 
 public class IpTrieNode {
 
+    private static final short possibleNumbers = 256;
     private IpTrieNode[] children;
     private byte isEnd;
 
     public IpTrieNode(boolean isLeaf) {
         if (!isLeaf) {
-            children = new IpTrieNode[256];
+            children = new IpTrieNode[possibleNumbers];
         } else {
             this.isEnd = 1;
         }
