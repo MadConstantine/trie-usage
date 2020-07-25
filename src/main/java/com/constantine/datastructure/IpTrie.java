@@ -23,7 +23,7 @@ public class IpTrie {
         IpTrieNode tempNode = root;
 
         for(int i=0; i<4; i++) {
-            int octet = Integer.parseInt(octets[i]);
+            short octet = Short.parseShort(octets[i]);
             if(!tempNode.contains(octet)) {
                 tempNode.put(i == 3, octet);
             }
@@ -45,7 +45,7 @@ public class IpTrie {
             IpTrieNode tempNode = list.pop();
 
             if (!tempNode.isEnd()) {
-                for(int i=0; i<256; i++) {
+                for(short i=0; i<256; i++) {
                     if(tempNode.contains(i)) {
                         list.push(tempNode.get(i));
                     }
