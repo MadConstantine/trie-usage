@@ -2,12 +2,13 @@ package com.constantine.datastructure;
 
 public class IpTrieNode {
 
-    private static final char digitsNumber = 256;
+    //private static final char digitsNumber = 256;
     private IpTrieNode[] children;
     private byte isEnd;
 
     public IpTrieNode() {
-        children = new IpTrieNode[digitsNumber];
+        //children = new IpTrieNode[digitsNumber];
+        children = new IpTrieNode[256];
     }
 
     public void put(int value) {
