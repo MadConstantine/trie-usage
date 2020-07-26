@@ -1,34 +1,51 @@
 package com.constantine.datastructure;
 
-import java.util.HashMap;
-
 public class IpTrieNode {
 
-    private HashMap<Short, IpTrieNode> children;
+    private final short value;
+    private IpTrieNode[] children;
     private byte isEnd;
 
-    public IpTrieNode(boolean isLeaf) {
+    public IpTrieNode(boolean isLeaf, short value) {
         if (!isLeaf) {
-            children = new HashMap<>();
+            children = new IpTrieNode[10];
         } else {
             this.isEnd = 1;
         }
+        this.value = value;
     }
 
     public void put(boolean isPreLeaf, short value) {
-        if (isPreLeaf) {
-            children.put(value, new IpTrieNode(true));
-        } else {
-            children.put(value, new IpTrieNode(false));
+
+        for (short i=0; i<children.length; i++) {
+            if (children[i] == null) {
+                children[i] = new IpTrieNode(isPreLeaf, value);
+                break;
+            }
+            if (i == children.length-1) {
+                IpTrieNode[] temp = new IpTrieNode[children.length+5];
+                System.arraycopy(children, 0, temp, 0, children.length);
+                children = temp;
+            }
         }
     }
 
     public IpTrieNode get(short value) {
-        return children.get(value);
+        for (IpTrieNode temp: children) {
+            if(temp.getValue() == value) {
+                return temp;
+            }
+        }
+        return null;
     }
 
     public boolean contains(short value) {
-        return children.get(value) != null;
+        for (IpTrieNode temp: children) {
+            if(temp != null && temp.getValue() == value) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setEnd() {
@@ -37,5 +54,9 @@ public class IpTrieNode {
 
     public boolean isEnd() {
         return this.isEnd == 1;
+    }
+
+    public short getValue() {
+        return value;
     }
 }
