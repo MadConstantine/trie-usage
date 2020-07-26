@@ -1,34 +1,42 @@
 package com.constantine.datastructure;
 
-import java.util.HashMap;
+import java.util.*;
 
-public class IpTrieNode {
+public class IpTrieNode implements Comparable<IpTrieNode> {
 
-    private HashMap<Short, IpTrieNode> children;
+    private short value;
+    private TreeSet<IpTrieNode> children;
     private byte isEnd;
 
-    public IpTrieNode(boolean isLeaf) {
+    public IpTrieNode(boolean isLeaf, short value) {
         if (!isLeaf) {
-            children = new HashMap<>();
+            children = new TreeSet<>();
         } else {
             this.isEnd = 1;
         }
+        this.value = value;
     }
 
     public void put(boolean isPreLeaf, short value) {
         if (isPreLeaf) {
-            children.put(value, new IpTrieNode(true));
+            children.add(new IpTrieNode(true, value));
         } else {
-            children.put(value, new IpTrieNode(false));
+            children.add(new IpTrieNode(false, value));
         }
     }
 
     public IpTrieNode get(short value) {
-        return children.get(value);
+        IpTrieNode node = null;
+        for (IpTrieNode temp: children) {
+            if(temp.equals(new IpTrieNode(true, value))) {
+                node = temp;
+            }
+        }
+        return node;
     }
 
     public boolean contains(short value) {
-        return children.get(value) != null;
+        return children.contains(new IpTrieNode(true, value));
     }
 
     public void setEnd() {
@@ -37,5 +45,25 @@ public class IpTrieNode {
 
     public boolean isEnd() {
         return this.isEnd == 1;
+    }
+
+    public short getValue() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        IpTrieNode that = (IpTrieNode) o;
+        return this.value == that.getValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue());
+    }
+
+    @Override
+    public int compareTo(IpTrieNode o) {
+        return Short.compare(value, o.getValue());
     }
 }

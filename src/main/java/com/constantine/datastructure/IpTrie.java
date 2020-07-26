@@ -11,7 +11,7 @@ public class IpTrie {
     private final IpTrieNode root;
 
     public IpTrie() {
-        root = new IpTrieNode(false);
+        root = new IpTrieNode(false, (short) 0);
     }
 
     /**
