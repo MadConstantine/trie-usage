@@ -26,6 +26,10 @@ public class IpTrieNode {
         children.trimToSize();
     }
 
+    /**
+     * Retrieves node with certain value
+     * don't use it without 'contains' or you end up with null
+     */
     public IpTrieNode get(short value) {
         for (IpTrieNode temp: children) {
             if(temp.getValue() == value) {
@@ -35,6 +39,9 @@ public class IpTrieNode {
         return null;
     }
 
+    /**
+     * Checks whether tree has node with certain value or not
+     */
     public boolean contains(short value) {
         for (IpTrieNode temp: children) {
             if(temp.getValue() == value) {
