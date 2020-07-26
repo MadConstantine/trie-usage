@@ -12,14 +12,14 @@ public class App {
         LocalTime start = LocalTime.now();
         System.out.println("Start time: " + start);
 
-        long count = 0;
+//        long count = 0;
         IpTrie trie = new IpTrie();
 
         try (BufferedReader buffer = new BufferedReader(new FileReader(args[0]))) {
             for(String line; (line = buffer.readLine()) != null; ) {
                 trie.storeAddress(line);
-                count++;
-                System.out.println("Addresses stored: " + count);
+//                count++;
+//                System.out.println("Addresses stored: " + count);
             }
         }
 
